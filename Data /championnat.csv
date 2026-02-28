@@ -1,0 +1,7 @@
+data/championnat.csv
+
+HomeTeam,AwayTeam,FTHG,FTAG,xG_Home,xG_Away
+PSG,Lyon,2,1,2.3,1.1
+Marseille,Monaco,1,1,1.5,1.4
+Chelsea,Arsenal,0,2,0.9,2.0
+RealMadrid,Barcelona,3,2,2.7,2.1
