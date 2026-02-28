@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BetBot Pro ELITE</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+async function loadData(){
+    let res=await fetch("/data");
+    let data=await res.json();
+    let html="";
+    data.forEach(m=>{
+        html+=`<h3>${m.match}</h3>`;
+        m.values.forEach(v=>{
+            html+=`🔥 VALUE ${v.label} | Prob ${v.prob}% | Mise ${v.mise}€<br>`;
+        });
+    });
+    document.getElementById("values").innerHTML=html;
+
+    let res2=await fetch("/bankroll");
+    let br=await res2.json();
+    new Chart(document.getElementById("bankrollChart"),{
+        type:'line',
+        data:{
+            labels:br.history.map((_,i)=>i+1),
+            datasets:[{
+                label:'Bankroll (€)',
+                data:br.history,
+                borderColor:'green',
+                fill:false
+            }]
+        }
+    });
+}
+setInterval(loadData,30000);
+</script>
+</head>
+<body onload="loadData()">
+<h2>🤖 BetBot Pro ELITE</h2>
+<div id="values"></div>
+<canvas id="bankrollChart" width="600" height="300"></canvas>
+</body>
+</html>
